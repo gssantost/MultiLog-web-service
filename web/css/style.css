@@ -1,0 +1,30 @@
+
+.huge{
+    margin-top: 10vh !important;
+    text-align: center !important;
+    letter-spacing: 5vw;
+    display: block;
+    font-size: 10vw;
+}
+
+
+#firstRow .button{
+    width: 10vw !important;
+    font-size: 12px !important;
+}
+
+#firstRow{
+    margin-top: 20vh !important;
+    margin-bottom: 20vh !important;
+
+}
+
+.purple{
+    width: 15vw;
+    align-content: center !important;
+    margin-bottom: 10vh !important;
+}
+
+#firstRow input{
+    border-color: grey !important;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Multilog</title>
+
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+    <script src="js/semantic.min.js"></script>
+</head>
+
+<body>
+
+    <div class="ui container">
+
+        <div class="ui huge header">MULTILOG</div>
+       
+            <div class="ui centered grid">
+
+                <div class="row" id="firstRow">
+                
+                    <div class="eight wide column">
+
+                        <div class="ui fluid input">
+                            <input type="text" placeholder="Description" id="description">
+                        </div>
+
+                    </div>
+
+                    <div class="two wide column">
+                        
+                        <div class="ui fluid selection dropdown button" id="status">
+                            <div class="text">HTTP Status</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu" >
+                                <div class="item">200</div>
+                                <div class="item">203</div>
+                                <div class="item">204</div>
+                                <div class="item">205</div>
+                                <div class="item">206</div>
+                                <div class="item">207</div>
+                                <div class="item">208</div>
+                                <div class="item">226</div>
+                                <div class="item">300</div>
+                                <div class="item">301</div>
+                                <div class="item">302</div>
+                                <div class="item">303</div>
+                                <div class="item">304</div>
+                                <div class="item">305</div>
+                                <div class="item">306</div>
+                                <div class="item">307</div>
+                                <div class="item">308</div>
+                                <div class="item">400</div>
+                                <div class="item">401</div>
+                                <div class="item">403</div>
+                                <div class="item">404</div>
+                                <div class="item">405</div>
+                                <div class="item">406</div>
+                                <div class="item">407</div>
+                                <div class="item">408</div>
+                                <div class="item">409</div>
+                                <div class="item">411</div>
+                                <div class="item">412</div>
+                                <div class="item">415</div>
+                                <div class="item">417</div>
+                                <div class="item">429</div>
+                                <div class="item">431</div>
+                                <div class="item">500</div>
+                                <div class="item">501</div>
+                                <div class="item">502</div>
+                                <div class="item">504</div>
+                                <div class="item">505</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="two wide column">
+                        <div class="ui fluid selection dropdown button" id="module">
+                            <div class="text" id="Module">Module</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item" value="Authorization">Authorization</div>
+                                <div class="item" value="Security" >Security</div>
+                                <div class="item" value="Configuration">Configuration</div>
+                                <div class="item" value="Enviroment">Enviroment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="two wide column">
+                        <div class="ui fluid selection dropdown button" id="logType">
+                            <div class="text">LogType</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item">Warning</div>
+                                <div class="item">Debug</div>
+                                <div class="item">Error</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="center aligned row">
+                    
+                        <button class="ui purple basic button" onclick="send()">
+                                SEND
+                        </button>
+                    
+                </div>
+            </div>
+
+    </div>
+
+
+</body>
+<script>
+    $('.ui.dropdown')
+  .dropdown();
+
+  let send = () => {
+      json={}
+       json.des = document.getElementById("description").value
+       json.status = document.getElementById("status").innerText
+       json.module = document.getElementById("module").innerText
+       json.logType = document.getElementById("logType").innerText
+
+      console.log(JSON.stringify(json,null,2))
+  }
+</script>
+
+</html>
