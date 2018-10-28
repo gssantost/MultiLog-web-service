@@ -11,10 +11,10 @@ public class Main {
     public static void main(String[] args) throws LifecycleException {
         Tomcat tomcat = new Tomcat();
         tomcat.setBaseDir("/WebServer");
-        tomcat.setPort(3000);
+        tomcat.setPort(4000);
         Context ctx = null;
         try {
-            ctx = tomcat.addWebapp("/multilog", System.getProperty("user.dir") + "\\" + "WebServer/WebContent");
+            ctx = tomcat.addWebapp("/multilog", System.getProperty("user.dir") + "\\" + "WebServer/WebApp");
         } catch (ServletException e) {
             e.printStackTrace();
         }
