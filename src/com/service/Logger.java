@@ -62,8 +62,8 @@ public class Logger {
         for (Log _log : logs) {
             String logText =
                     ">DESCRIPTION: " + _log.getDescription() + "\n" +
-                    ">MODULE: " + _log.getModule() + "\n" +
-                    ">HTTP_STATUS: " + _log.getCode() + "\n";
+                    "> MODULE: " + _log.getModule() + "\n" +
+                    "> HTTP_STATUS: " + _log.getCode() + "\n";
             lines.add(logText);
             System.out.println(logText);
         }
