@@ -11,9 +11,11 @@ public class Memo extends JFrame {
     private JTextArea textArea;
     private JScrollPane textPane;
     private JButton clearButton;
+    private Tray memoTray;
 
     public Memo() {
         //setSize(700, 700);
+        memoTray = new Tray();
         setTitle("MultiLog Memo");
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
