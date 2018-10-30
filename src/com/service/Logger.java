@@ -6,22 +6,20 @@ import com.utils.ConfigProperties;
 import com.utils.FileManager;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.xml.ws.Endpoint;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebService
 public class Logger {
 
-    private static final String ADDRESS = "http://localhost:8080:/gger";
-    //private FileManager fm;
+    public static List<Log> logs;
 
-    public static void main(String[] args) {
-        Object implementor = new Logger();
-        Endpoint.publish(ADDRESS, implementor);
+    public static List<Log> getLogList() {
+        //System.out.println("Tamaño de ListLogs en el momento " + logs.size());
+        return logs;
     }
 
     @WebMethod
@@ -30,15 +28,20 @@ public class Logger {
     }
 
     @WebMethod
-    public Boolean add(Log log) {
-        Boolean didInsert = false;
-        ConfigProperties configProperties = ConfigProperties.getInstance();
-        if(Boolean.parseBoolean(configProperties.getProperty("activeDb"))) {
-            try {
-                 didInsert = new LogDAO().addLog(log);
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+    public Boolean add(@WebParam(name = "description") String description, @WebParam(name = "logType") int logType, @WebParam(name = "moduleName") String module,
+                       @WebParam(name = "statusCode") int statusCode, @WebParam(name = "platform") int platform) {
+        Boolean didInsert = null;
+        Log log = new Log();
+        log.setDescription(description);
+        log.setLogType(logType);
+        log.setModule(module);
+        log.setCode(statusCode);
+        log.setUrl("/here");
+        log.setPlatform(platform);
+        try {
+            didInsert = new LogDAO().addLog(log);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
         return didInsert;
     }
@@ -49,40 +52,27 @@ public class Logger {
     }
 
     @WebMethod
-    public void getLog(String date) {
-        List<Log> logs = null;
+    public void getLog(@WebParam(name = "date") String date) {
         try {
             logs = new LogDAO().get(date);
-        } catch (SQLException | ClassNotFoundException e) {
+            FileManager fm = new FileManager();
+            if (Boolean.valueOf(ConfigProperties.getInstance().getProperty("textFiles"))) {
+                fm.printLogs(logs);
+            }
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
-
-        FileManager fm = new FileManager();
-        List<String> lines = new ArrayList<>();
-        for (Log _log : logs) {
-            String logText =
-                    ">DESCRIPTION: " + _log.getDescription() + "\n" +
-                    "> MODULE: " + _log.getModule() + "\n" +
-                    "> HTTP_STATUS: " + _log.getCode() + "\n";
-            lines.add(logText);
-            System.out.println(logText);
-        }
-
-        try {
-            fm.add(lines);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
-    /*private void save(String txt) {
-        this.fm = new FileManager();
+    /*@WebMethod(operationName = "getLog1")
+    public void getLog(@WebParam(name = "dateFrom") String dateFrom, @WebParam(name = "dateTo") String dateTo) {
         try {
-            if (this.fm.createFile()) {
-                this.fm.add(txt);
+            logs = new LogDAO().get(dateFrom, dateTo);
+            FileManager fm = new FileManager();
+            if (Boolean.valueOf(ConfigProperties.getInstance().getProperty("textFiles"))) {
+                fm.printLogs(logs);
             }
-        } catch (IOException e) {
+        } catch (SQLException | ClassNotFoundException | IOException e) {
             e.printStackTrace();
         }
     }*/
