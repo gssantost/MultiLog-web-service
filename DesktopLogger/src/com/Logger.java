@@ -53,18 +53,21 @@ public interface Logger {
 
     /**
      * 
-     * @param arg0
+     * @param dateTo
+     * @param dateFrom
      * @return
-     *     returns java.lang.Boolean
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "delete", targetNamespace = "http://service.com/", className = "com.Delete")
-    @ResponseWrapper(localName = "deleteResponse", targetNamespace = "http://service.com/", className = "com.DeleteResponse")
-    @Action(input = "http://service.com/Logger/deleteRequest", output = "http://service.com/Logger/deleteResponse")
-    public Boolean delete(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+    @RequestWrapper(localName = "getLogByRange", targetNamespace = "http://service.com/", className = "com.GetLogByRange")
+    @ResponseWrapper(localName = "getLogByRangeResponse", targetNamespace = "http://service.com/", className = "com.GetLogByRangeResponse")
+    @Action(input = "http://service.com/Logger/getLogByRangeRequest", output = "http://service.com/Logger/getLogByRangeResponse")
+    public String getLogByRange(
+        @WebParam(name = "dateFrom", targetNamespace = "")
+        String dateFrom,
+        @WebParam(name = "dateTo", targetNamespace = "")
+        String dateTo);
 
     /**
      * 
@@ -81,12 +84,15 @@ public interface Logger {
     /**
      * 
      * @param date
+     * @return
+     *     returns java.lang.String
      */
     @WebMethod
+    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getLog", targetNamespace = "http://service.com/", className = "com.GetLog")
     @ResponseWrapper(localName = "getLogResponse", targetNamespace = "http://service.com/", className = "com.GetLogResponse")
     @Action(input = "http://service.com/Logger/getLogRequest", output = "http://service.com/Logger/getLogResponse")
-    public void getLog(
+    public String getLog(
         @WebParam(name = "date", targetNamespace = "")
         String date);
 

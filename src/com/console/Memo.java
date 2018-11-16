@@ -17,6 +17,7 @@ public class Memo extends JFrame {
         //setSize(700, 700);
         memoTray = new Tray();
         setTitle("MultiLog Memo");
+        setBounds(0, 0, 200, 500);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();

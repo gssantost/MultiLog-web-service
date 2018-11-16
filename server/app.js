@@ -20,6 +20,7 @@ app.get('/logs', (req, res) => {
 })
 
 app.post('/logs', (req, res) => {
+  console.log(req.body)
   const { description, logType, moduleName, statusCode, platform } = req.body;
   soap.createClient(wsdl, (err, client) => {
     if (err) console.log(err)

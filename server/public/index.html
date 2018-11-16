@@ -123,14 +123,37 @@
     $('.ui.dropdown')
   .dropdown();
 
-  let send = () => {
-      json={}
-       json.des = document.getElementById("description").value
-       json.status = document.getElementById("status").innerText
-       json.module = document.getElementById("module").innerText
-       json.logType = document.getElementById("logType").innerText
+  //const $ = (id) => document.getElementById(id);
 
-      console.log(JSON.stringify(json,null,2))
+  const send = () => {
+    let config = {
+      method: 'post', 
+      headers: {'Content-Type':'application/json' },
+      body: JSON.stringify({
+        description: document.getElementById("description").value,
+        statusCode: parseInt(document.getElementById("status").innerText),
+        moduleName: document.getElementById("module").innerText,
+        logType: getLogTypeId(document.getElementById("logType").innerText),
+        platform: 2
+      })
+    }
+
+    console.log(config.body);
+
+    fetch('/logs', config)
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e))
+  };
+
+  const getLogTypeId = (name) => {
+    let id;
+    switch (name.trim()) {
+      case 'Warning' : id = 1; break;
+      case 'Debug' : id = 2; break;
+      case 'Error' : id = 3; break;
+    }
+    return id;
   }
 </script>
 

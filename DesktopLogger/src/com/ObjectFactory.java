@@ -24,14 +24,14 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Delete_QNAME = new QName("http://service.com/", "delete");
     private final static QName _PingResponse_QNAME = new QName("http://service.com/", "pingResponse");
     private final static QName _GetLogResponse_QNAME = new QName("http://service.com/", "getLogResponse");
-    private final static QName _DeleteResponse_QNAME = new QName("http://service.com/", "deleteResponse");
     private final static QName _AddResponse_QNAME = new QName("http://service.com/", "addResponse");
     private final static QName _GetLog_QNAME = new QName("http://service.com/", "getLog");
+    private final static QName _GetLogByRangeResponse_QNAME = new QName("http://service.com/", "getLogByRangeResponse");
     private final static QName _Ping_QNAME = new QName("http://service.com/", "ping");
     private final static QName _Add_QNAME = new QName("http://service.com/", "add");
+    private final static QName _GetLogByRange_QNAME = new QName("http://service.com/", "getLogByRange");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com
@@ -49,11 +49,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DeleteResponse }
+     * Create an instance of {@link GetLogByRange }
      * 
      */
-    public DeleteResponse createDeleteResponse() {
-        return new DeleteResponse();
+    public GetLogByRange createGetLogByRange() {
+        return new GetLogByRange();
     }
 
     /**
@@ -73,6 +73,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetLogByRangeResponse }
+     * 
+     */
+    public GetLogByRangeResponse createGetLogByRangeResponse() {
+        return new GetLogByRangeResponse();
+    }
+
+    /**
      * Create an instance of {@link Ping }
      * 
      */
@@ -89,28 +97,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Delete }
-     * 
-     */
-    public Delete createDelete() {
-        return new Delete();
-    }
-
-    /**
      * Create an instance of {@link PingResponse }
      * 
      */
     public PingResponse createPingResponse() {
         return new PingResponse();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Delete }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://service.com/", name = "delete")
-    public JAXBElement<Delete> createDelete(Delete value) {
-        return new JAXBElement<Delete>(_Delete_QNAME, Delete.class, null, value);
     }
 
     /**
@@ -132,15 +123,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://service.com/", name = "deleteResponse")
-    public JAXBElement<DeleteResponse> createDeleteResponse(DeleteResponse value) {
-        return new JAXBElement<DeleteResponse>(_DeleteResponse_QNAME, DeleteResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link AddResponse }{@code >}}
      * 
      */
@@ -159,6 +141,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLogByRangeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.com/", name = "getLogByRangeResponse")
+    public JAXBElement<GetLogByRangeResponse> createGetLogByRangeResponse(GetLogByRangeResponse value) {
+        return new JAXBElement<GetLogByRangeResponse>(_GetLogByRangeResponse_QNAME, GetLogByRangeResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Ping }{@code >}}
      * 
      */
@@ -174,6 +165,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://service.com/", name = "add")
     public JAXBElement<Add> createAdd(Add value) {
         return new JAXBElement<Add>(_Add_QNAME, Add.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLogByRange }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://service.com/", name = "getLogByRange")
+    public JAXBElement<GetLogByRange> createGetLogByRange(GetLogByRange value) {
+        return new JAXBElement<GetLogByRange>(_GetLogByRange_QNAME, GetLogByRange.class, null, value);
     }
 
 }

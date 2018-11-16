@@ -29,17 +29,26 @@ public class FileManager {
         Files.write(Paths.get(this.logsPath), lines, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
     }
 
+    public void printLog(Log log) throws IOException {
+        List<String> lines = new ArrayList<>();
+        lines.add("Log added on " + new Date().toString() + "\n");
+        String logText =
+                getTypeName(log) + "\t" +
+                        ">DATE: " + new Date(log.getDate()) + "\t" +
+                        ">DESCRIPTION: " + log.getDescription() + "\t" +
+                        ">MODULE: " + log.getModule() + "\t" +
+                        ">HTTP_STATUS: " + log.getCode() + "\n";
+        lines.add(logText);
+        lines.add("\n");
+        Files.write(Paths.get(this.logsPath), lines, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
     public void printLogs(List<Log> logs) throws IOException {
         List<String> lines = new ArrayList<>();
         lines.add("Logs checked on " + new Date().toString() + "\n");
         for (Log _log : logs) {
-            String logType = "";
-            switch (_log.getLogType()) {
-                case 1: logType = "WARNING"; break;
-                case 2: logType = "DEBUG"; break;
-            }
             String logText =
-                    logType + "\t" +
+                    getTypeName(_log) + "\t" +
                     ">DATE: " + new Date(_log.getDate()) + "\t" +
                     ">DESCRIPTION: " + _log.getDescription() + "\t" +
                     ">MODULE: " + _log.getModule() + "\t" +
@@ -48,6 +57,15 @@ public class FileManager {
         }
         lines.add("\n");
         Files.write(Paths.get(this.logsPath), lines, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+    }
+
+    private String getTypeName(Log log) {
+        String logType = "";
+        switch (log.getLogType()) {
+            case 1: logType = "WARNING"; break;
+            case 2: logType = "DEBUG"; break;
+        }
+        return logType;
     }
 
 }
