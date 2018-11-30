@@ -11,6 +11,7 @@ import java.awt.*;
 public class LoggerRunner {
 
     private static final String ADDRESS = "http://localhost:8080/services/Logger";
+    private static int logsSize = 0;
 
     public static void main(String[] args) {
         System.out.println("Web Service...");
@@ -33,15 +34,21 @@ public class LoggerRunner {
                              if (logger.get().isEmpty()) {
                                  sleep(1000);
                              } else {
-                                 int position = logger.get().size()-1;
-                                 Log _log = logger.get().get(position);
-                                 memo.log(_log);
-                                 memo.append("\n");
-                                 logger.get().remove(position);
-                                 sleep(1000);
+                                 int size = logger.get().size();
+                                 if(logsSize < size) {
+                                     logsSize = size;
+                                     int position = size-1;
+                                     Log _log = logger.get().get(position);
+                                     memo.log(_log);
+                                     memo.append("\n");
+//                                 logger.get().remove(position);
+                                     sleep(1000);
+                                 } else if(logsSize > size){
+                                    logsSize = 0;
+                                 }
                              }
                          } else {
-                            memo.append("ECHO property must be 'true' for get Logger output.\n");
+                            //memo.append("ECHO property must be 'true' for get Logger output.\n");
                             sleep(2000);
                          }
                     }

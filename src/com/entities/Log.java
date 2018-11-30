@@ -12,6 +12,7 @@ public class Log {
 	private String module;
 	private String url;
 	private long date;
+	private String messageFormat;
 	
 	public int getId() {
 		return id;
@@ -60,5 +61,13 @@ public class Log {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getMessageFormat() {
+		return messageFormat;
+	}
+
+	public void setMessageFormat(String messageFormat) {
+		this.messageFormat = messageFormat;
 	}
 }

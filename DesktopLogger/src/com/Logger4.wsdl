@@ -10,17 +10,17 @@
 <message name="addResponse">
 <part name="parameters" element="tns:addResponse"/>
 </message>
-<message name="getLog">
-<part name="parameters" element="tns:getLog"/>
-</message>
-<message name="getLogResponse">
-<part name="parameters" element="tns:getLogResponse"/>
-</message>
 <message name="getLogByRange">
 <part name="parameters" element="tns:getLogByRange"/>
 </message>
 <message name="getLogByRangeResponse">
 <part name="parameters" element="tns:getLogByRangeResponse"/>
+</message>
+<message name="getLog">
+<part name="parameters" element="tns:getLog"/>
+</message>
+<message name="getLogResponse">
+<part name="parameters" element="tns:getLogResponse"/>
 </message>
 <message name="ping">
 <part name="parameters" element="tns:ping"/>
@@ -33,13 +33,13 @@
 <input wsam:Action="http://service.com/Logger/addRequest" message="tns:add"/>
 <output wsam:Action="http://service.com/Logger/addResponse" message="tns:addResponse"/>
 </operation>
-<operation name="getLog">
-<input wsam:Action="http://service.com/Logger/getLogRequest" message="tns:getLog"/>
-<output wsam:Action="http://service.com/Logger/getLogResponse" message="tns:getLogResponse"/>
-</operation>
 <operation name="getLogByRange">
 <input wsam:Action="http://service.com/Logger/getLogByRangeRequest" message="tns:getLogByRange"/>
 <output wsam:Action="http://service.com/Logger/getLogByRangeResponse" message="tns:getLogByRangeResponse"/>
+</operation>
+<operation name="getLog">
+<input wsam:Action="http://service.com/Logger/getLogRequest" message="tns:getLog"/>
+<output wsam:Action="http://service.com/Logger/getLogResponse" message="tns:getLogResponse"/>
 </operation>
 <operation name="ping">
 <input wsam:Action="http://service.com/Logger/pingRequest" message="tns:ping"/>
@@ -57,7 +57,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getLog">
+<operation name="getLogByRange">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -66,7 +66,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getLogByRange">
+<operation name="getLog">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

@@ -2,6 +2,7 @@ package com.console;
 
 
 import com.entities.Log;
+import com.utils.Prop;
 
 import javax.swing.*;
 import java.sql.Date;
@@ -36,10 +37,42 @@ public class Memo extends JFrame {
 
     public void log(Log log) {
         String logText =
-                ">DATE: " + new Date(log.getDate()) + "\t" +
-                ">DESCRIPTION: " + log.getDescription() + "\t" +
-                ">MODULE: " + log.getModule() + "\t" +
-                ">HTTP_STATUS: " + log.getCode() + "\n";
-        this.append(logText);
+                ">" + getTypeName(log) + " " +
+                        ">DATE: " + new Date(log.getDate()) + "\t" +
+                        ">DESCRIPTION: " + log.getDescription() + "\t" +
+                        ">MODULE: " + log.getModule() + "\t" +
+                        ">HTTP_STATUS: " + log.getCode() + "\n";
+
+        String typeName = getTypeName(log);
+
+        switch (typeName) {
+            case "WARNING":
+                if (Boolean.valueOf(new Prop().getProperty("warning"))) {
+                    this.append(logText);
+                }
+                break;
+            case "DEBUG":
+                if (Boolean.valueOf(new Prop().getProperty("debug"))) {
+                    this.append(logText);
+                }
+                break;
+            case "ERROR":
+                if (Boolean.valueOf(new Prop().getProperty("error"))) {
+                    this.append(logText);
+                }
+                break;
+        }
+        //this.append(logText);
+    }
+
+
+    private String getTypeName(Log log) {
+        String logType = "";
+        switch (log.getLogType()) {
+            case 1: logType = "WARNING"; break;
+            case 2: logType = "DEBUG"; break;
+            case 3: logType = "ERROR"; break;
+        }
+        return logType;
     }
 }

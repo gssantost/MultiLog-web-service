@@ -3,6 +3,7 @@ package com.daos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.entities.Log;
@@ -97,6 +98,11 @@ public class LogDAO extends DAO {
 			log.setModule(rs.getString("module"));
 			log.setDate(rs.getTimestamp("date").getTime());
 			log.setUrl(rs.getString("url"));
+			log.setMessageFormat(getTypeName(log) + "\t" +
+					">DATE: " + new Date(log.getDate()) + "\t" +
+					">DESCRIPTION: " + log.getDescription() + "\t" +
+					">MODULE: " + log.getModule() + "\t" +
+					">HTTP_STATUS: " + log.getCode() + "\n");
 			list.add(log);
 		}
 		return list;
@@ -113,6 +119,11 @@ public class LogDAO extends DAO {
 			log.setModule(rs.getString("module"));
 			log.setDate(rs.getTimestamp("date").getTime());
 			log.setUrl(rs.getString("url"));
+			log.setMessageFormat(getTypeName(log) + "\t" +
+					">DATE: " + new Date(log.getDate()) + "\t" +
+					">DESCRIPTION: " + log.getDescription() + "\t" +
+					">MODULE: " + log.getModule() + "\t" +
+					">HTTP_STATUS: " + log.getCode() + "\n");
 		}
 		return log;
 	}
@@ -128,4 +139,12 @@ public class LogDAO extends DAO {
 		return resp;
 	}
 
+	private String getTypeName(Log log) {
+		String logType = "";
+		switch (log.getLogType()) {
+			case 1: logType = "WARNING"; break;
+			case 2: logType = "DEBUG"; break;
+		}
+		return logType;
+	}
 }

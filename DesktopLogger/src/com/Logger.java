@@ -71,18 +71,6 @@ public interface Logger {
 
     /**
      * 
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "ping", targetNamespace = "http://service.com/", className = "com.Ping")
-    @ResponseWrapper(localName = "pingResponse", targetNamespace = "http://service.com/", className = "com.PingResponse")
-    @Action(input = "http://service.com/Logger/pingRequest", output = "http://service.com/Logger/pingResponse")
-    public String ping();
-
-    /**
-     * 
      * @param date
      * @return
      *     returns java.lang.String
@@ -95,5 +83,17 @@ public interface Logger {
     public String getLog(
         @WebParam(name = "date", targetNamespace = "")
         String date);
+
+    /**
+     * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "ping", targetNamespace = "http://service.com/", className = "com.Ping")
+    @ResponseWrapper(localName = "pingResponse", targetNamespace = "http://service.com/", className = "com.PingResponse")
+    @Action(input = "http://service.com/Logger/pingRequest", output = "http://service.com/Logger/pingResponse")
+    public String ping();
 
 }

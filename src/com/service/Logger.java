@@ -12,9 +12,12 @@ import org.json.JSONObject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebService
@@ -59,16 +62,31 @@ public class Logger {
             e.printStackTrace();
             didInsert = false;
         }
+        System.out.println("AFTER INSERT INTO DB");
         if (didLog != null) {
+            System.out.println("DID LOG");
             didInsert = true;
             add(didLog);
+
             boolean textFiles = Boolean.valueOf(new Prop().getProperty("textFiles"));
+
             if (textFiles) {
-                FileManager fm = new FileManager();
-                try {
-                    fm.printLog(log);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                int size = 0;
+                for(Log _log: this.logs) {
+                    size = size + _log.getMessageFormat().length();
+                }
+                System.out.println("Logs size: " + size);
+                if(Integer.valueOf(new Prop().getProperty("sizeFile")) < size) {
+                    FileManager fm = new FileManager();
+                    try {
+                        fm.printLogs(this.logs);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    } finally {
+                        this.logs.clear();
+                    }
                 }
             }
         }
@@ -97,6 +115,16 @@ public class Logger {
         }
         JSONArray data = new LogParser().doArray(logs);
         return data.toString();
+    }
+
+    private String getTypeName(Log log) {
+        String logType = "";
+        switch (log.getLogType()) {
+            case 1: logType = "WARNING"; break;
+            case 2: logType = "DEBUG"; break;
+            case 3: logType = "ERROR"; break;
+        }
+        return logType;
     }
 
 }
